@@ -1,6 +1,6 @@
 {
   "name": "tags",
-  "version": "0.2.0",
+  "version": "1.0.1",
   "description": "Generate DOM for reactjs in vanilla javascript",
   "main": "tags.build.js",
   "scripts": {
