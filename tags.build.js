@@ -1,4 +1,69 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+exports.makeTags = makeTags;
+exports.exposeGlobals = exposeGlobals;
+
+function _interopExportWildcard(obj, defaults) { var newObj = defaults({}, obj); delete newObj['default']; return newObj; }
+
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+var _tagsReact = require('./tags-react');
+
+var tagsReact = _interopRequireWildcard(_tagsReact);
+
+var _tagsStyles = require('./tags-styles');
+
+var tagsStyles = _interopRequireWildcard(_tagsStyles);
+
+var _tagsHelpers = require('./tags-helpers');
+
+var tagsHelpers = _interopRequireWildcard(_tagsHelpers);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+_defaults(exports, _interopExportWildcard(_tagsReact, _defaults));
+
+_defaults(exports, _interopExportWildcard(_tagsStyles, _defaults));
+
+var _tagsFonts = require('./tags-fonts');
+
+_defaults(exports, _interopExportWildcard(_tagsFonts, _defaults));
+
+_defaults(exports, _interopExportWildcard(_tagsHelpers, _defaults));
+
+function makeTags(tags) {
+	return _lodash2['default'].map(tags, tagsReact.makeTag);
+}
+
+function exposeGlobals(tagNames) {
+	if (!tagNames) {
+		tagNames = ('a,br,button,div,form,h1,h2,h3,h4,h5,h6,hr,iframe,img,input,label,li,ol,' + 'option,output,p,pre,span,table,tbody,td,textarea,tfoot,th,thead,tr,u,ul').split(',');
+	}
+	_lodash2['default'].each(tagNames, function (tagName) {
+		exposeGlobal(tagName, tagsReact.makeTag(tagName));
+	});
+	_lodash2['default'].each(tagsHelpers, exposeGlobal);
+	_lodash2['default'].each(tagsStyles, exposeGlobal);
+}
+
+function exposeGlobal(name, value) {
+	console.log("GLOBAL", name);
+	global[name] = value;
+}
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./tags-fonts":2,"./tags-helpers":3,"./tags-react":4,"./tags-styles":5,"lodash":undefined}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -64,7 +129,7 @@ function makeFontFunctionFromFVD(fontFamily, styleFVD) {
 	};
 }
 
-},{"./tags-styles":4,"lodash":undefined,"webfontloader":undefined}],2:[function(require,module,exports){
+},{"./tags-styles":5,"lodash":undefined,"webfontloader":undefined}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -106,7 +171,7 @@ function attrFunction(attrName) {
 	};
 }
 
-},{"lodash":undefined}],3:[function(require,module,exports){
+},{"lodash":undefined}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -153,7 +218,7 @@ function isReactObj(arg) {
 	;
 }
 
-},{"lodash":undefined,"react":undefined}],4:[function(require,module,exports){
+},{"lodash":undefined,"react":undefined}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -199,69 +264,4 @@ function styleFunction(styleName) {
 	};
 }
 
-},{"lodash":undefined}],5:[function(require,module,exports){
-(function (global){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-exports.makeTags = makeTags;
-exports.exposeGlobals = exposeGlobals;
-
-function _interopExportWildcard(obj, defaults) { var newObj = defaults({}, obj); delete newObj['default']; return newObj; }
-
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-var _tagsReact = require('./tags-react');
-
-var tagsReact = _interopRequireWildcard(_tagsReact);
-
-var _tagsStyles = require('./tags-styles');
-
-var tagsStyles = _interopRequireWildcard(_tagsStyles);
-
-var _tagsHelpers = require('./tags-helpers');
-
-var tagsHelpers = _interopRequireWildcard(_tagsHelpers);
-
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-_defaults(exports, _interopExportWildcard(_tagsReact, _defaults));
-
-_defaults(exports, _interopExportWildcard(_tagsStyles, _defaults));
-
-var _tagsFonts = require('./tags-fonts');
-
-_defaults(exports, _interopExportWildcard(_tagsFonts, _defaults));
-
-_defaults(exports, _interopExportWildcard(_tagsHelpers, _defaults));
-
-function makeTags(tags) {
-	return _lodash2['default'].map(tags, tagsReact.makeTag);
-}
-
-function exposeGlobals(tagNames) {
-	if (!tagNames) {
-		tagNames = ('a,br,button,div,form,h1,h2,h3,h4,h5,h6,hr,iframe,img,input,label,li,ol,' + 'option,output,p,pre,span,table,tbody,td,textarea,tfoot,th,thead,tr,u,ul').split(',');
-	}
-	_lodash2['default'].each(tagNames, function (tagName) {
-		exposeGlobal(tagName, tagsReact.makeTag(tagName));
-	});
-	_lodash2['default'].each(tagsHelpers, exposeGlobal);
-	_lodash2['default'].each(tagsStyles, exposeGlobal);
-}
-
-function exposeGlobal(name, value) {
-	console.log("GLOBAL", name);
-	global[name] = value;
-}
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./tags-fonts":1,"./tags-helpers":2,"./tags-react":3,"./tags-styles":4,"lodash":undefined}]},{},[5]);
+},{"lodash":undefined}]},{},[1]);
