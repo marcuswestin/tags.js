@@ -1,5 +1,5 @@
 // normally, require('tags')
-var tags = require('../es6')
+var tags = require('../src')
 var ReactDOM = require('react-dom')
 var React = require('react')
 
