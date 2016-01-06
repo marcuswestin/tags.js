@@ -5,10 +5,10 @@ export function View() {
 	return envWrapper.View.apply(this, arguments)
 }
 export function TextView() {
-	return envWrapper.Text.apply(this, arguments)
+	return envWrapper.TextView.apply(this, arguments)
 }
 export function ImageView() {
-	return envWrapper.Image.apply(this, arguments)
+	return envWrapper.ImageView.apply(this, arguments)
 }
 export function ListView() {
 	return envWrapper.ListView.apply(this, arguments)
