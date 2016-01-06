@@ -2,25 +2,6 @@
 (function (global){
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-	value: true
-});
-exports.MakeTag = MakeTag;
-exports.MakeTags = MakeTags;
-exports.ExposeDOMGlobals = ExposeDOMGlobals;
-
-function _interopExportWildcard(obj, defaults) {
-	var newObj = defaults({}, obj);delete newObj['default'];return newObj;
-}
-
-function _defaults(obj, defaults) {
-	var keys = Object.getOwnPropertyNames(defaults);for (var i = 0; i < keys.length; i++) {
-		var key = keys[i];var value = Object.getOwnPropertyDescriptor(defaults, key);if (value && value.configurable && obj[key] === undefined) {
-			Object.defineProperty(obj, key, value);
-		}
-	}return obj;
-}
-
 function _interopRequireWildcard(obj) {
 	if (obj && obj.__esModule) {
 		return obj;
@@ -37,118 +18,49 @@ function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _react = require('react');
+var _lodash = require('lodash');
 
-var _react2 = _interopRequireDefault(_react);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _reactDom = require('react-dom');
 
 var ReactDOM = _interopRequireWildcard(_reactDom);
 
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _srcIndex = require('../src/index');
 
-var _srcTagsWrapEnv = require('../src/tags-wrap-env');
+var _srcTagsViews = require('../src/tags-views');
 
-var tagsWrapEnv = _interopRequireWildcard(_srcTagsWrapEnv);
+module.exports = require('../src/index');
 
-var _srcTagsStyles = require('../src/tags-styles');
-
-var tagsStyles = _interopRequireWildcard(_srcTagsStyles);
-
-var _srcTagsHelpers = require('../src/tags-helpers');
-
-var tagsHelpers = _interopRequireWildcard(_srcTagsHelpers);
-
-_defaults(exports, _interopExportWildcard(_srcIndex, _defaults));
-
-tagsWrapEnv._wrapEnvFunctions({
-	View: function View() {
-		return div.apply(this, arguments);
-	},
-	TextView: function TextView() {
-		return span.apply(this, arguments);
-	},
-	ImageView: function ImageView() {
-		return img.apply(this, arguments);
-	},
-	ListView: function ListView() {
-		return div.apply(this, arguments);
-	},
-	OnTap: function OnTap(handleTap) {
-		return { onClick: handleTap };
-	},
-	MountApp: function MountApp(ReactView, el) {
-		if (!el) {
-			el = document.body.appendChild(document.createElement('div'));
-		}
-		ReactDOM.render(ReactView(), el);
-	}
+(0, _srcIndex._bootstrap)(renderDOM, {
+	View: 'div',
+	Text: 'span',
+	Image: 'img'
 });
+
+function renderDOM(ViewComponent, el) {
+	if (!el) {
+		el = document.body.appendChild(document.createElement('div'));
+	}
+	return ReactDOM.render(ViewComponent(), el);
+}
 
 // Functions specific to DOM environment
 ////////////////////////////////////////
-
-function MakeTag(tagName) {
-	return makeWebTagFactory(tagName);
-}
-
-function MakeTags(tags) {
-	return _lodash2['default'].map(tags, MakeTag);
-}
-
-function ExposeDOMGlobals(tagNames) {
-	var tagNames = ('a,br,button,div,form,h1,h2,h3,h4,h5,h6,hr,iframe,img,input,label,li,ol,' + 'option,output,p,pre,span,table,tbody,td,textarea,tfoot,th,thead,tr,u,ul').split(',');
+module.exports.ExposeDOMGlobals = function (tagNames) {
+	var tagNames = ('A,BR,BUTTON,DIV,FORM,H1,H2,H3,H4,H5,H6,HR,IFRAME,IMG,INPUT,LABEL,LI,OL,' + 'OPTION,OUTPUT,P,PRE,SPAN,TABLE,TBODY,TD,TEXTAREA,TFOOT,TH,THEAD,TR,U,UL').split(',');
 	_lodash2['default'].each(tagNames, function (tagName) {
-		exposeGlobalTagName(tagName.toUpperCase());
+		exposeGlobalTagName(tagName);
 	});
-}
+};
 
 function exposeGlobalTagName(tagName) {
 	console.log("tags/bootstraps/dom-bootstrap.js: EXPOSING GLOBAL VARIABLE", tagName);
-	global[tagName] = makeWebTagFactory(tagName);
-}
-
-// Internal
-///////////
-
-var div = makeWebTagFactory('div');
-var span = makeWebTagFactory('span');
-var a = makeWebTagFactory('a');
-
-function makeWebTagFactory(tagName) {
-	return function () {
-		var props = { style: {} };
-		var children = [];
-		_lodash2['default'].each(arguments, processArg);
-		function processArg(val) {
-			if (isReactObj(val)) {
-				children.push(val);
-			} else if (_lodash2['default'].isFunction(val)) {
-				processArg(val(props, children));
-			} else if (_lodash2['default'].isArray(val) || _lodash2['default'].isArguments(val)) {
-				_lodash2['default'].each(val, processArg);
-			} else if (_lodash2['default'].isObject(val)) {
-				_lodash2['default'].assign(props, val);
-			} else if (val !== undefined) {
-				children.push(val);
-			}
-		}
-		return _react2['default'].createElement.apply(_react2['default'], [tagName, props].concat(children));
-	};
-}
-
-function isReactObj(arg) {
-	return arg && !!(arg['$$typeof'] || // v0.14.0
-	arg._isReactElement) // v0.13.3.0
-	;
+	global[tagName] = (0, _srcTagsViews.CreateViewFactory)(tagName);
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../src/index":2,"../src/tags-helpers":5,"../src/tags-styles":6,"../src/tags-wrap-env":7,"lodash":undefined,"react":undefined,"react-dom":undefined}],2:[function(require,module,exports){
+},{"../src/index":2,"../src/tags-views":7,"lodash":undefined,"react-dom":undefined}],2:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -157,6 +69,7 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.ViewComponent = ViewComponent;
 exports.ExposeGlobals = ExposeGlobals;
+exports._bootstrap = _bootstrap;
 
 function _interopExportWildcard(obj, defaults) {
 	var newObj = defaults({}, obj);delete newObj['default'];return newObj;
@@ -186,6 +99,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _tagsViews = require('./tags-views');
+
+var _srcTagsFlexbox = require('../src/tags-flexbox');
+
 var _tagsFlexbox = require('./tags-flexbox');
 
 _defaults(exports, _interopExportWildcard(_tagsFlexbox, _defaults));
@@ -202,31 +119,42 @@ var _tagsStyles = require('./tags-styles');
 
 _defaults(exports, _interopExportWildcard(_tagsStyles, _defaults));
 
-var _tagsWrapEnv = require('./tags-wrap-env');
-
-_defaults(exports, _interopExportWildcard(_tagsWrapEnv, _defaults));
+_defaults(exports, _interopExportWildcard(_tagsViews, _defaults));
 
 function ViewComponent(args) {
 	return _react2['default'].createFactory(_react2['default'].createClass(args));
 }
 
 function ExposeGlobals() {
+	_lodash2['default'].each(module.exports, exposeGlobal);
+}
+
+function exposeGlobal(value, key) {
 	var exclude = {
-		_wrapEnvFunctions: true,
-		MountApp: true,
+		Render: true,
 		LoadFont: true
 	};
-	_lodash2['default'].each(module.exports, function (value, key) {
-		if (exclude[key]) {
-			return;
-		}
-		console.log("tags.js: EXPOSING GLOBAL VARIABLE", key);
-		global[key] = value;
+	if (exclude[key]) {
+		return;
+	}
+	if (!/^[A-Z]/.test(key[0])) {
+		return;
+	}
+	console.log("tags.js: EXPOSING GLOBAL VARIABLE", key);
+	global[key] = value;
+}
+
+function _bootstrap(RenderFn, views) {
+	module.exports.Render = RenderFn;
+	_lodash2['default'].each(views, function (viewSpecifier, viewName) {
+		module.exports[viewName] = (0, _tagsViews.CreateViewFactory)(viewSpecifier);
 	});
+	var defaultViewName = _lodash2['default'].first(_lodash2['default'].keys(views));
+	(0, _srcTagsFlexbox._setViewFn)(module.exports[defaultViewName]);
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./tags-flexbox":3,"./tags-fonts":4,"./tags-helpers":5,"./tags-styles":6,"./tags-wrap-env":7,"lodash":undefined,"react":undefined,"react-dom":undefined}],3:[function(require,module,exports){
+},{"../src/tags-flexbox":3,"./tags-flexbox":3,"./tags-fonts":4,"./tags-helpers":5,"./tags-styles":6,"./tags-views":7,"lodash":undefined,"react":undefined,"react-dom":undefined}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -245,32 +173,33 @@ exports.Order = Order;
 exports.Fix = Fix;
 exports.Flex = Flex;
 exports.AlignSelf = AlignSelf;
+exports._setViewFn = _setViewFn;
 
 var _tagsStyles = require('./tags-styles');
 
-var _tagsWrapEnv = require('./tags-wrap-env');
+var ViewFn = null;
 
 // Flex Containers
 //////////////////
 
 function Row() {
 	var styles = (0, _tagsStyles.Style)({ display: 'flex', flexDirection: 'row' });
-	return (0, _tagsWrapEnv.View)(styles, arguments);
+	return ViewFn(styles, arguments);
 }
 
 function Col() {
 	var styles = (0, _tagsStyles.Style)({ display: 'flex', flexDirection: 'column' });
-	return (0, _tagsWrapEnv.View)(styles, arguments);
+	return ViewFn(styles, arguments);
 }
 
 function RowReverse() {
 	var styles = (0, _tagsStyles.Style)({ display: 'flex', flexDirection: 'row-reverse' });
-	return (0, _tagsWrapEnv.View)(styles, arguments);
+	return ViewFn(styles, arguments);
 }
 
 function ColReverse() {
 	var styles = (0, _tagsStyles.Style)({ display: 'flex', flexDirection: 'col-reverse' });
-	return (0, _tagsWrapEnv.View)(styles, arguments);
+	return ViewFn(styles, arguments);
 }
 
 // Flex Container properties
@@ -337,7 +266,14 @@ function AlignSelf(alignSelf) {
 	return (0, _tagsStyles.Style)({ alignSelf: alignSelf });
 }
 
-},{"./tags-styles":6,"./tags-wrap-env":7}],4:[function(require,module,exports){
+// Internal
+///////////
+
+function _setViewFn(_ViewFn) {
+	ViewFn = _ViewFn;
+}
+
+},{"./tags-styles":6}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -503,13 +439,7 @@ function styleFunction(styleName) {
 Object.defineProperty(exports, '__esModule', {
 	value: true
 });
-exports.View = View;
-exports.TextView = TextView;
-exports.ImageView = ImageView;
-exports.ListView = ListView;
-exports.OnTap = OnTap;
-exports.MountApp = MountApp;
-exports._wrapEnvFunctions = _wrapEnvFunctions;
+exports.CreateViewFactory = CreateViewFactory;
 
 function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { 'default': obj };
@@ -519,45 +449,53 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-// Required env wrapper functions
+var _react = require('react');
 
-function View() {
-	return envWrapper.View.apply(this, arguments);
+var _react2 = _interopRequireDefault(_react);
+
+// viewSpecifier is 'div/span/a/input/etc' for react-dom,
+// and React.View/React.Text/React.ScrollView for react-native
+
+function CreateViewFactory(viewSpecifier) {
+	return function () {
+		var props = { style: {} };
+		var children = [];
+		_lodash2['default'].each(arguments, processArg);
+		function processArg(val) {
+			if (_isReactObj(val)) {
+				children.push(val);
+			} else if (_lodash2['default'].isFunction(val)) {
+				processArg(val(props, children));
+			} else if (_lodash2['default'].isArray(val) || _lodash2['default'].isArguments(val)) {
+				_lodash2['default'].each(val, processArg);
+			} else if (_lodash2['default'].isObject(val)) {
+				_lodash2['default'].assign(props, val);
+			} else if (val !== undefined) {
+				children.push(val);
+			}
+		}
+		return _react2['default'].createElement.apply(_react2['default'], [viewSpecifier, props].concat(children));
+	};
 }
 
-function TextView() {
-	return envWrapper.TextView.apply(this, arguments);
-}
-
-function ImageView() {
-	return envWrapper.ImageView.apply(this, arguments);
-}
-
-function ListView() {
-	return envWrapper.ListView.apply(this, arguments);
-}
-
-function OnTap() {
-	return envWrapper.OnTap.apply(this, arguments);
-}
-
-function MountApp() {
-	return envWrapper.MountApp.apply(this, arguments);
-}
-
-// Internal
-///////////
-
-var envWrapper;
-// exported for access from bootstraps/*-bootstrap.js
-
-function _wrapEnvFunctions(_envWrapper) {
-	var wrapperKeys = _lodash2['default'].keys(_envWrapper).sort().join(', ');
-	var expectedKeys = 'ImageView, ListView, MountApp, OnTap, TextView, View';
-	if (wrapperKeys != expectedKeys) {
-		throw new Error('Bad env wrapper. Expected: ' + expectedKeys + '. Received: ' + wrapperKeys);
+function _checkKeys(expected, received) {
+	var receivedKeys = _lodash2['default'].keys(received).sort().join(', ');
+	var expectedKeys = _lodash2['default'].keys(expected).sort().join(', ');
+	if (receivedKeys != expectedKeys) {
+		throw new Error('Bad keys. Expected: ' + expectedKeys + '. Received: ' + receivedKeys);
 	}
-	envWrapper = _envWrapper;
+	_lodash2['default'].each(expected, function (val, key) {
+		if (!_lodash2['default'].isObject(val)) {
+			return;
+		}
+		_checkKeys(expected[key], received[key]);
+	});
 }
 
-},{"lodash":undefined}]},{},[1]);
+function _isReactObj(arg) {
+	return arg && !!(arg['$$typeof'] || // v0.14.0
+	arg._isReactElement) // v0.13.3.0
+	;
+}
+
+},{"lodash":undefined,"react":undefined}]},{},[1]);
