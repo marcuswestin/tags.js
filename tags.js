@@ -9,13 +9,33 @@ exports.MakeTag = MakeTag;
 exports.MakeTags = MakeTags;
 exports.ExposeDOMGlobals = ExposeDOMGlobals;
 
-function _interopExportWildcard(obj, defaults) { var newObj = defaults({}, obj); delete newObj['default']; return newObj; }
+function _interopExportWildcard(obj, defaults) {
+	var newObj = defaults({}, obj);delete newObj['default'];return newObj;
+}
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+function _defaults(obj, defaults) {
+	var keys = Object.getOwnPropertyNames(defaults);for (var i = 0; i < keys.length; i++) {
+		var key = keys[i];var value = Object.getOwnPropertyDescriptor(defaults, key);if (value && value.configurable && obj[key] === undefined) {
+			Object.defineProperty(obj, key, value);
+		}
+	}return obj;
+}
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+function _interopRequireWildcard(obj) {
+	if (obj && obj.__esModule) {
+		return obj;
+	} else {
+		var newObj = {};if (obj != null) {
+			for (var key in obj) {
+				if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+			}
+		}newObj['default'] = obj;return newObj;
+	}
+}
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { 'default': obj };
+}
 
 var _react = require('react');
 
@@ -117,7 +137,7 @@ function makeWebTagFactory(tagName) {
 				children.push(val);
 			}
 		}
-		return _react2['default'].createElement.call(_react2['default'], tagName, props, children);
+		return _react2['default'].createElement.apply(_react2['default'], [tagName, props].concat(children));
 	};
 }
 
@@ -138,11 +158,21 @@ Object.defineProperty(exports, '__esModule', {
 exports.ViewComponent = ViewComponent;
 exports.ExposeGlobals = ExposeGlobals;
 
-function _interopExportWildcard(obj, defaults) { var newObj = defaults({}, obj); delete newObj['default']; return newObj; }
+function _interopExportWildcard(obj, defaults) {
+	var newObj = defaults({}, obj);delete newObj['default'];return newObj;
+}
 
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+function _defaults(obj, defaults) {
+	var keys = Object.getOwnPropertyNames(defaults);for (var i = 0; i < keys.length; i++) {
+		var key = keys[i];var value = Object.getOwnPropertyDescriptor(defaults, key);if (value && value.configurable && obj[key] === undefined) {
+			Object.defineProperty(obj, key, value);
+		}
+	}return obj;
+}
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { 'default': obj };
+}
 
 var _lodash = require('lodash');
 
@@ -315,7 +345,9 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.LoadFont = LoadFont;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { 'default': obj };
+}
 
 var _lodash = require('lodash');
 
@@ -380,7 +412,9 @@ Object.defineProperty(exports, '__esModule', {
 	value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { 'default': obj };
+}
 
 var _lodash = require('lodash');
 
@@ -423,7 +457,9 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.Style = Style;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { 'default': obj };
+}
 
 var _lodash = require('lodash');
 
@@ -475,7 +511,9 @@ exports.OnTap = OnTap;
 exports.MountApp = MountApp;
 exports._wrapEnvFunctions = _wrapEnvFunctions;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { 'default': obj };
+}
 
 var _lodash = require('lodash');
 
@@ -488,11 +526,11 @@ function View() {
 }
 
 function TextView() {
-	return envWrapper.Text.apply(this, arguments);
+	return envWrapper.TextView.apply(this, arguments);
 }
 
 function ImageView() {
-	return envWrapper.Image.apply(this, arguments);
+	return envWrapper.ImageView.apply(this, arguments);
 }
 
 function ListView() {
