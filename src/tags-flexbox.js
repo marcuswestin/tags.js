@@ -1,23 +1,24 @@
 import {Style} from './tags-styles'
-import {View} from './tags-wrap-env'
+
+var ViewFn = null
 
 // Flex Containers
 //////////////////
 export function Row() {
 	var styles = Style({ display:'flex', flexDirection:'row' })
-	return View(styles, arguments)
+	return ViewFn(styles, arguments)
 }
 export function Col() {
 	var styles = Style({ display:'flex', flexDirection:'column' })
-	return View(styles, arguments)
+	return ViewFn(styles, arguments)
 }
 export function RowReverse() {
 	var styles = Style({ display:'flex', flexDirection:'row-reverse' })
-	return View(styles, arguments)
+	return ViewFn(styles, arguments)
 }
 export function ColReverse() {
 	var styles = Style({ display:'flex', flexDirection:'col-reverse' })
-	return View(styles, arguments)
+	return ViewFn(styles, arguments)
 }
 
 // Flex Container properties
@@ -62,4 +63,11 @@ export function Flex(flexGrow, flexShrink, flexBasis) {
 // 'auto/flex-start/flex-end/center/baseline/stretch'
 export function AlignSelf(alignSelf) {
 	return Style({ alignSelf:alignSelf })
+}
+
+// Internal
+///////////
+
+export function _setViewFn(_ViewFn) {
+	ViewFn = _ViewFn
 }
