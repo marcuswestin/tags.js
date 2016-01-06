@@ -1,31 +1,26 @@
-export * from './tags-react'
-export * from './tags-styles'
+import _ from 'lodash'
+import ReactDOM from 'react-dom'
+import React from 'react'
+
+export * from './tags-flexbox'
 export * from './tags-fonts'
 export * from './tags-helpers'
+export * from './tags-styles'
+export * from './tags-wrap-env'
 
-import * as tagsReact from './tags-react'
-import * as tagsStyles from './tags-styles'
-import * as tagsHelpers from './tags-helpers'
-
-import _ from 'lodash'
-
-export function makeTags(tags) {
-	return _.map(tags, tagsReact.makeTag)
+export function ViewComponent(args) {
+	return React.createFactory(React.createClass(args))
 }
 
-export function exposeGlobals(tagNames) {
-	 if (!tagNames) {
-	 	tagNames = ('a,br,button,div,form,h1,h2,h3,h4,h5,h6,hr,iframe,img,input,label,li,ol,'+
-	 		'option,output,p,pre,span,table,tbody,td,textarea,tfoot,th,thead,tr,u,ul').split(',')
-	 }
-	 _.each(tagNames, function(tagName) {
-	 	exposeGlobal(tagName, tagsReact.makeTag(tagName))
-	 })
-	 _.each(tagsHelpers, exposeGlobal)
-	 _.each(tagsStyles, exposeGlobal)
-}
-
-function exposeGlobal(name, value) {
-	console.log("GLOBAL", name)
-	global[name] = value
+export function ExposeGlobals() {
+	var exclude = {
+		_wrapEnvFunctions: true,
+		MountApp: true,
+		LoadFont: true,
+	}
+	_.each(module.exports, function(value, key) {
+		if (exclude[key]) { return }
+		console.log("tags.js: EXPOSING GLOBAL VARIABLE", key)
+		global[key] = value
+	})
 }
