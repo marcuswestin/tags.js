@@ -82,7 +82,7 @@ function makeWebTagFactory(tagName) {
 				children.push(val)
 			}
 		}
-		return React.createElement.call(React, tagName, props, children)
+		return React.createElement(tagName, props, ...children)
 	}
 }
 
