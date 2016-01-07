@@ -23,6 +23,7 @@
     "uglifyify": "^3.0.1"
   },
   "dependencies": {
+    "babel-preset-es2015": "^6.3.13",
     "lodash": "^3.10.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
