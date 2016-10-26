@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import ReactDOM from 'react-dom'
 import React from 'react'
 import {CreateViewFactory} from './tags-views'
 import {_setViewFn} from '../src/tags-flexbox'
