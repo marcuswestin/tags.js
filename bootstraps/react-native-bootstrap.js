@@ -1,6 +1,6 @@
 module.exports = require('../src/index')
 
-import * as ReactNative from 'react-native'
+import ReactNative from 'react-native'
 import {_bootstrap} from '../src/index'
 
 _bootstrap(renderNative, {
