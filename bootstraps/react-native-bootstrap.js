@@ -1,3 +1,4 @@
+// Don't change to `import * from`, since _bootstrap modifies module.exports
 module.exports = require('../src/index')
 
 import ReactNative from 'react-native'

@@ -1,3 +1,4 @@
+// Don't change to `import * from`, since _bootstrap modifies module.exports
 module.exports = require('../src/index')
 
 import _ from 'lodash'
@@ -20,6 +21,7 @@ function renderDOM(ViewComponent, el) {
 
 // Functions specific to DOM environment
 ////////////////////////////////////////
+
 module.exports.ExposeDOMGlobals = function(tagNames) {
 	var tagNames = ('A,BR,BUTTON,DIV,FORM,H1,H2,H3,H4,H5,H6,HR,IFRAME,IMG,INPUT,LABEL,LI,OL,'+
 		'OPTION,OUTPUT,P,PRE,SPAN,TABLE,TBODY,TD,TEXTAREA,TFOOT,TH,THEAD,TR,U,UL').split(',')

@@ -1,6 +1,7 @@
+// Don't change to `import * from`, since _bootstrap modifies module.exports
 module.exports = require('../src/index')
 
-import * as ReactNativeDesktop from 'react-native-desktop'
+import ReactNativeDesktop from 'react-native-desktop'
 import {_bootstrap} from '../src/index'
 
 _bootstrap(renderNative, {
