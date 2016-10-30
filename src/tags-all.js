@@ -1,28 +1,14 @@
 import React from 'react'
-import {_setViewFn} from '../src/tags-flexbox'
 import { each, isFunction, isArray, isObject, isArguments, assign, first, keys } from 'lodash'
-
+import {_setViewFn} from '../src/tags-flexbox'
+	
 export * from './tags-flexbox'
 export * from './tags-helpers'
 export * from './tags-styles'
 
-export function exposeGlobals() {
-	each(module.exports, function exposeGlobal(value, key) {
-		var exclude = {
-			Render: true,
-			LoadFont: true,
-		}
-		if (exclude[key]) { return }
-		if (!/^[A-Z]/.test(key[0])) { return }
-		console.log("tags.js: EXPOSING GLOBAL VARIABLE", key)
-		global[key] = value
-	})
-}
-
-
-// E.g createViewFactory('div') or createViewFactory('button') for react-dom,
-// and createViewFactory(React.View) or createViewFactory(React.ScrollView) for react-native
-export function createViewFactory(viewSpecifier) {
+// E.g createFactory('div') or createFactory('button') for react-dom,
+// and createFactory(React.View) or createFactory(React.ScrollView) for react-native
+export function createFactory(viewSpecifier) {
 	return function() {
 		var props = { style:{} }
 		var children = []
@@ -54,11 +40,10 @@ function _isReactObj(arg) {
 	)
 }
 
-
-export function _bootstrap(RenderFn, views) {
-	module.exports.Render = RenderFn
+export function _bootstrap(views, renderFn) {
+	module.exports.render = renderFn
 	each(views, function(viewSpecifier, viewName) {
-		module.exports[viewName] = createViewFactory(viewSpecifier)
+		module.exports[viewName] = createFactory(viewSpecifier)
 	})
 	var defaultViewName = first(keys(views))
 	_setViewFn(module.exports[defaultViewName])

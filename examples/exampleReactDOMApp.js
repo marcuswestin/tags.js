@@ -1,11 +1,11 @@
-// normally, require('tags/react-dom') or require('tags/react-native')
-var tags = require('../react-dom')
+var Tags = require('../react-dom') // normally require('tags/react-dom')
+var React = require('react')
 
-tags.ExposeGlobals()
-var Input = tags.createViewFactory('input')
-var Font = tags.LoadFont('Lato', 'n4', { italic: 'i4', bold: 'n7', boldItalic: 'i7' }, onFontsLoaded)
+var { View, Text, Col, OnClick, OnChange, Style, Background, Color } = Tags
+var Input = Tags.createFactory('input')
+var Font = Tags.loadFont('Lato', 'n4', { italic: 'i4', bold: 'n7', boldItalic: 'i7' }, onFontsLoaded)
 
-var AppView = tags.ViewComponent({
+var App = React.createClass({
 	getInitialState: function() {
 		return { input: 'Hi' }
 	},
@@ -34,5 +34,5 @@ var loadingMessage = document.body.appendChild(document.createElement('View'))
 loadingMessage.innerText = 'loading fonts...'
 function onFontsLoaded() {
 	document.body.removeChild(loadingMessage)
-	tags.Render(AppView)
+	Tags.render(App)
 }
