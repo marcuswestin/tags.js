@@ -3,7 +3,7 @@ import webfontloader from 'webfontloader'
 import { Style } from './tags-styles'
 
 /* An example. Font styles are given in FVD (https://github.com/typekit/fvd):
-var Font = tags.LoadFont('Lato', 'n4', { Italic:'i4', Light:'n2' }, function(didLoad) {
+var Font = tags.loadFont('Lato', 'n4', { Italic:'i4', Light:'n2' }, function(didLoad) {
 	if (!didLoad) { alert("Could not load fonts") }
 	div(Font(13), 'Regular Lato, size 13',
 		div(Font.Italic(18), 'Italic Lato, size 18'),
@@ -11,7 +11,7 @@ var Font = tags.LoadFont('Lato', 'n4', { Italic:'i4', Light:'n2' }, function(did
 	)
 })
 */
-export function LoadFont(familyName, defaultStyleFVD, additionalNamedStyleFVDs, onDone) {
+export function loadFont(familyName, defaultStyleFVD, additionalNamedStyleFVDs, onDone) {
 	var fvdSpecifiers = _.map(additionalNamedStyleFVDs, (specifier, _) => specifier)
 	var fontsString = familyName+':'+fvdSpecifiers.join(',')
 	webfontloader.load({

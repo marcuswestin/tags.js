@@ -1,8 +1,8 @@
-// normally, require('tags')
-var tags = require('../bootstraps/react-dom-bootstrap')
+// normally, require('tags/react-dom') or require('tags/react-native')
+var tags = require('../react-dom')
 
 tags.ExposeGlobals()
-var Input = tags.CreateViewFactory('input')
+var Input = tags.createViewFactory('input')
 var Font = tags.LoadFont('Lato', 'n4', { italic: 'i4', bold: 'n7', boldItalic: 'i7' }, onFontsLoaded)
 
 var AppView = tags.ViewComponent({

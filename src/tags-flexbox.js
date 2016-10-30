@@ -1,28 +1,29 @@
 import {Style} from './tags-styles'
 
-var ViewFn = null
-
 // Flex Containers
 //////////////////
+
 export function Row() {
 	var styles = Style({ display:'flex', flexDirection:'row' })
-	return ViewFn(styles, arguments)
+	return _ViewFn(styles, arguments)
 }
 export function Col() {
 	var styles = Style({ display:'flex', flexDirection:'column' })
-	return ViewFn(styles, arguments)
+	return _ViewFn(styles, arguments)
 }
 export function RowReverse() {
 	var styles = Style({ display:'flex', flexDirection:'row-reverse' })
-	return ViewFn(styles, arguments)
+	return _ViewFn(styles, arguments)
 }
 export function ColReverse() {
 	var styles = Style({ display:'flex', flexDirection:'col-reverse' })
-	return ViewFn(styles, arguments)
+	return _ViewFn(styles, arguments)
 }
+
 
 // Flex Container properties
 ////////////////////////////
+
 // true, false, 'wrap-reverse'
 export function Wrap(flexWrap) {
 	if (flexWrap == undefined) { flexWrap = true }
@@ -68,6 +69,7 @@ export function AlignSelf(alignSelf) {
 // Internal
 ///////////
 
-export function _setViewFn(_ViewFn) {
-	ViewFn = _ViewFn
+var _ViewFn
+export function _setViewFn(fn) {
+	_ViewFn = fn
 }
