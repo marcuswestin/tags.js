@@ -3,6 +3,7 @@ import _ from 'lodash'
 export var OnClick = attrFunction('onClick')
 export var OnKeyPress = attrFunction('onKeyPress')
 export var OnChange = attrFunction('onChange')
+export var OnPress = attrFunction('onPress')
 
 export var Map = wrap(function(items, fn) {
 	return _.map(items, fn, this)
