@@ -1,4 +1,4 @@
-import {Style} from './tags-styles'
+import { Style } from './tags-styles'
 
 // Flex Containers
 //////////////////
