@@ -1,9 +1,10 @@
 var Tags = require('../react-dom') // normally require('tags/react-dom')
 var React = require('react')
+var createReactClass = require('create-react-class')
 
 var { Text, View, Style, Flex, Padding, TouchableHighlight, NavigatorIOS } = Tags
 
-var MyScene = React.createClass({
+var MyScene = createReactClass({
   propTypes: {
     navigator: React.PropTypes.object.isRequired,
   },
@@ -24,7 +25,7 @@ var MyScene = React.createClass({
   
 })
 
-var App = React.createClass({
+var App = createReactClass({
   _handleNavigationRequest: function () {
     this.refs.nav.push({ component: MyScene, title: 'Genius', passProps: { myProp: 'genius' } })
   },

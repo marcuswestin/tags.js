@@ -1,11 +1,12 @@
 var Tags = require('../react-dom') // normally require('tags/react-dom')
 var React = require('react')
+var createReactClass = require('create-react-class')
 
 var { View, Text, Col, OnClick, OnChange, Style, Background, Color } = Tags
 var Input = Tags.createFactory('input')
 var Font = Tags.loadFont('Lato', 'n4', { italic: 'i4', bold: 'n7', boldItalic: 'i7' }, onFontsLoaded)
 
-var App = React.createClass({
+var App = createReactClass({
 	getInitialState: function() {
 		return { input: 'Hi' }
 	},
@@ -30,7 +31,7 @@ var App = React.createClass({
 	}
 })
 
-var loadingMessage = document.body.appendChild(document.createElement('View'))
+var loadingMessage = document.body.appendChild(document.createElement('div'))
 loadingMessage.innerText = 'loading fonts...'
 function onFontsLoaded() {
 	document.body.removeChild(loadingMessage)
