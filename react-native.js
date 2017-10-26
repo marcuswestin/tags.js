@@ -6,7 +6,12 @@ import {_bootstrap} from './src/tags-all'
 import { each, map, isFunction } from 'lodash'
 
 // These keys cause runtime warnings and errors when accessed (e.g `ReactNative.AppStatIOS`)
-var avoidBadKeys = { PushNotificationIOS: true, AppStateIOS: true, LinkingIOS: true }
+var avoidBadKeys = {
+	// react-native mobile
+	PushNotificationIOS: true, AppStateIOS: true, LinkingIOS: true,
+	// react-native-macos
+	StatusBar: true, Navigator: true,
+}
 
 _bootstrap(_getNativeComponents(avoidBadKeys), function renderNativeApp(AppComponent, name) {
 	ReactNative.AppRegistry.registerComponent(name || 'TagsReactNativeApp', () => AppComponent);

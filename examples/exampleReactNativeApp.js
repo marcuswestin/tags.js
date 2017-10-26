@@ -1,8 +1,8 @@
-var Tags = require('../react-dom') // normally require('tags/react-dom')
+var tags = require('../react-native') // normally require('tags/react-native')
 var React = require('react')
 var createReactClass = require('create-react-class')
 
-var { Text, View, Style, Flex, Padding, TouchableHighlight, NavigatorIOS } = Tags
+var { Text, View, Style, Flex, Padding, TouchableHighlight, NavigatorIOS } = tags
 
 var MyScene = createReactClass({
   propTypes: {
@@ -44,4 +44,4 @@ var App = createReactClass({
   }
 })
 
-Tags.render(App)
+tags.render(App)
