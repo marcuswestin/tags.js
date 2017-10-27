@@ -23,11 +23,13 @@ tags.StyleSheet = create(ReactNative.StyleSheet, {
 	}
 })
 
-// These keys cause runtime warnings and errors when accessed (e.g `ReactNative.AppStatIOS`)
+// These keys cause runtime warnings and errors when accessed (e.g
+// `ReactNative.AppStateIOS` in react-native or
+// `ReactNative.Navigator` in react-native-macos)
 var avoidBadKeys = {
-	// react-native mobile
+	// react-native:
 	PushNotificationIOS: true, AppStateIOS: true, LinkingIOS: true,
-	// react-native-macos
+	// react-native-macos:
 	StatusBar: true, Navigator: true, TouchableHighlight: true,
 }
 
@@ -45,6 +47,9 @@ function _getNativeComponents(avoidBadKeys) {
 			components[name] = ReactNative[name]
 		}
 	}
+	
+	components.Input = components.TextInput
+
 	return components
 }
 

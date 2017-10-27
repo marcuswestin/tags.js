@@ -1,5 +1,5 @@
 import React from 'react'
-import { each, isFunction, assign, isArray, isObject, isArguments, first, keys } from 'lodash'
+import { each, isFunction, assign, isArray, isObject, isArguments } from 'lodash'
 import {_setViewFn} from '../src/tags-flexbox'
 	
 export * from './tags-flexbox'
@@ -69,6 +69,5 @@ export function _bootstrap(views, renderFn) {
 	each(views, function(viewSpecifier, viewName) {
 		module.exports[viewName] = createFactory(viewSpecifier)
 	})
-	var defaultViewName = first(keys(views))
-	_setViewFn(module.exports[defaultViewName])
+	_setViewFn(module.exports.View)
 }
