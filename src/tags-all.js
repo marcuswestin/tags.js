@@ -1,5 +1,5 @@
 import React from 'react'
-import { each, isFunction, isArray, isObject, isArguments, assign, first, keys } from 'lodash'
+import { each, isFunction, assign, isArray, isObject, isArguments, first, keys } from 'lodash'
 import {_setViewFn} from '../src/tags-flexbox'
 	
 export * from './tags-flexbox'
@@ -10,11 +10,22 @@ export * from './tags-styles'
 // and createFactory(React.View) or createFactory(React.ScrollView) for react-native
 export function createFactory(viewSpecifier) {
 	return function() {
-		var props = { style:{} }
+		var props = {}
 		var children = []
 		each(arguments, function processArg(val) {
-			if (_isReactObj(val)) {
+			if (val === undefined) {
+				return
+				
+			} else if (_isReactObj(val)) {
 				children.push(val)
+				
+			} else if (val._tagsStyleVal) {
+				if (!props.style) {
+					props.style = [val._tagsStyleVal]
+				} else {
+					props.style.push(val._tagsStyleVal)
+				}
+
 				
 			} else if (isFunction(val)) {
 				processArg(val(props, children))
@@ -25,7 +36,7 @@ export function createFactory(viewSpecifier) {
 			} else if (isObject(val)) {
 				assign(props, val)
 				
-			} else if (val !== undefined) {
+			} else {
 				children.push(val)
 			}
 		})

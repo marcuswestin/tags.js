@@ -5,10 +5,6 @@ var createReactClass = require('create-react-class')
 var { Text, View, Style, Flex, Padding, TouchableHighlight, NavigatorIOS } = tags
 
 var MyScene = createReactClass({
-  propTypes: {
-    navigator: React.PropTypes.object.isRequired,
-  },
-
   _onForward: function () {
     this.props.navigator.push({
       component: MyScene,

@@ -7,14 +7,15 @@ export var Color = _styleFunction('color')
 export var Padding = _topRigBotLefStyleFunction('padding')
 export var Margin = _topRigBotLefStyleFunction('margin')
 
-export function Style(styles) {
-	return function (props, children) {
-		each(styles, function(val, key) {
-			props.style[key] = val
-		})
+class TagsStyle {
+	constructor(styles) {
+		this._tagsStyleVal = styles
 	}
 }
 
+export function Style(styles) {
+	return new TagsStyle(styles)
+}
 
 // Util
 ///////
