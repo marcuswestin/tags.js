@@ -6,8 +6,9 @@ import {_bootstrap} from './src/tags-all'
 import { each, map, isFunction, create } from 'lodash'
 
 class TagsStyleSheet {
+	_isTagsStyleSheet () { return true }
 	constructor(id) {
-		this._tagsStyleVal = id
+		this._tagsStyleSheetId = id
 	}
 }
 

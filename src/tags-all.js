@@ -19,13 +19,23 @@ export function createFactory(viewSpecifier) {
 			} else if (_isReactObj(val)) {
 				children.push(val)
 				
-			} else if (val._tagsStyleVal) {
+			} else if (val._isTagsStyleSheet) {
 				if (!props.style) {
-					props.style = [val._tagsStyleVal]
+					props.style = [val._tagsStyleSheetId]
+				} else if (!isArray(props.style)) {
+					throw new Error('Cannot use both tags.Style and tags.StyleSheet on the same element')
 				} else {
-					props.style.push(val._tagsStyleVal)
+					props.style.push(val._tagsStyleSheetId)
 				}
-
+				
+			} else if (val._isTagsStyleVal) {
+				if (!props.style) {
+					props.style = val._tagsStyleVal
+				} else if (!isObject(props.style)) {
+					throw new Error('Cannot use both tags.StyleSheet and tags.Style on the same element')
+				} else {
+					assign(props.style, val._tagsStyleVal)
+				}
 				
 			} else if (isFunction(val)) {
 				processArg(val(props, children))
@@ -34,6 +44,9 @@ export function createFactory(viewSpecifier) {
 				each(val, processArg)
 				
 			} else if (isObject(val)) {
+				if (val.style && props.style) {
+					throw new Error("Cannot use multiple style properties on the same element")
+				}
 				assign(props, val)
 				
 			} else {

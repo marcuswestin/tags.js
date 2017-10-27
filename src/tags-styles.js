@@ -8,6 +8,7 @@ export var Padding = _topRigBotLefStyleFunction('padding')
 export var Margin = _topRigBotLefStyleFunction('margin')
 
 class TagsStyle {
+	_isTagsStyleVal () { return true }
 	constructor(styles) {
 		this._tagsStyleVal = styles
 	}
