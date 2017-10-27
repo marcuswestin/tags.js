@@ -1,9 +1,9 @@
 import { each } from 'lodash'
 
-export var Width = _styleFunction('width')
-export var Height = _styleFunction('height')
-export var Background = _styleFunction('background')
-export var Color = _styleFunction('color')
+export var Width = (width) => Style({ width:width })
+export var Height = (height) => Style({ height:height })
+export var Background = (background) => Style({ background:background })
+export var Color = (color) => Style({ color:color })
 export var Padding = _topRigBotLefStyleFunction('padding')
 export var Margin = _topRigBotLefStyleFunction('margin')
 
@@ -20,14 +20,6 @@ export function Style(styles) {
 
 // Util
 ///////
-
-function _styleFunction(styleName) {
-	return function(styleValue) {
-		var res = {}
-		res[styleName] = styleValue
-		return Style(res)
-	}
-}
 
 _topRigBotLefStyleFunction.nameExt = ['Top', 'Right', 'Bottom', 'Left']
 function _topRigBotLefStyleFunction(styleName) {
