@@ -21,7 +21,7 @@ function _getComponents() {
 	).split(',')
 	var components = {}
 	each(tagNames, function(tagName) {
-		components[tagName] = tagName
+		components[tagName] = tagName.toLowerCase()
 	})
 	components.View = components.Div
 	components.Text = components.Span
