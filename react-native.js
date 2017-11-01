@@ -1,5 +1,5 @@
 // Don't change to `import * from`, since _bootstrap modifies module.exports
-var tags = module.exports = require('./src/tags-all')
+module.exports = require('./src/tags-all')
 
 import ReactNative from 'react-native'
 import {_bootstrap} from './src/tags-all'
@@ -27,7 +27,7 @@ class TagsStyleSheet {
 	}
 }
 
-tags.StyleSheet = create(ReactNative.StyleSheet, {
+module.exports.StyleSheet = create(ReactNative.StyleSheet, {
 	create: function createStyleSheet(props) {
 		var res = {}
 		var reactStyles = ReactNative.StyleSheet.create(props)
