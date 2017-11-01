@@ -5,6 +5,7 @@ export var Height = (height) => Style({ height:height })
 export var Background = (background) => Style({ background:background })
 export var Color = (color) => Style({ color:color })
 export var Padding = _topRigBotLefStyleFunction('padding')
+export var Pad = Padding
 export var Margin = _topRigBotLefStyleFunction('margin')
 
 class TagsStyle {
