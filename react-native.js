@@ -5,6 +5,21 @@ import ReactNative from 'react-native'
 import {_bootstrap} from './src/tags-all'
 import { each, map, isFunction, create } from 'lodash'
 
+var CursorManager = require('react-native-macos').NativeModules.CursorManager
+module.exports.Tappable = function(callback) {
+	return {
+		onPress: function() {
+			callback()
+		},
+		onMouseEnter: function() {
+			CursorManager.pointingHandCursor()
+		},
+		onMouseLeave: function() {
+			CursorManager.arrowCursor()
+		}
+	}
+}
+
 class TagsStyleSheet {
 	_isTagsStyleSheet () { return true }
 	constructor(id) {
