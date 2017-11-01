@@ -59,6 +59,7 @@ export function Fix(fix) {
 }
 // Nothing => { flex:'0 1 auto' }, Flex(1,0.5,100) => { flex:'1 0.5 100px' }
 export function Flex(flexGrow, flexShrink, flexBasis) {
+	if (flexGrow == undefined) { flexGrow = 1 }
 	return Style({ flexGrow:flexGrow, flexShrink:flexShrink, flexBasis:flexBasis })
 }
 // 'auto/flex-start/flex-end/center/baseline/stretch'
