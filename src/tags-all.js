@@ -14,7 +14,7 @@ export function createFactory(viewSpecifier, viewName) {
 		var props = {}
 		var children = []
 		each(arguments, function processArg(val) {
-			if (val === undefined) {
+			if (val === undefined || val === null || val === true || val === false) {
 				return
 				
 			} else if (_isReactObj(val)) {
