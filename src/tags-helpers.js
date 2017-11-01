@@ -1,4 +1,6 @@
 import _ from 'lodash'
+import { addStyleDefaults } from './tags-style-defaults'
+import randomColor from './util/randomColor'
 
 export var OnClick = attrFunction('onClick')
 export var OnKeyPress = attrFunction('onKeyPress')
@@ -8,6 +10,25 @@ export var OnPress = attrFunction('onPress')
 export var Map = wrap(function(items, fn) {
 	return _.map(items, fn, this)
 })
+
+export function renderRandomBackgrounds(shouldRender) {
+	renderRandomBackgrounds.shouldRender = shouldRender
+	if (renderRandomBackgrounds.initialized) {
+		return
+	}
+	renderRandomBackgrounds.initialized = true
+	setStyleDefaults(() => {
+		if (renderRandomBackgrounds.shouldRender) {
+			return { backgroundColor:randomColor() }
+		} else {
+			return null
+		}
+	})
+}
+
+export function setStyleDefaults(fn) {
+	addStyleDefaults(fn)
+}
 
 
 // Util

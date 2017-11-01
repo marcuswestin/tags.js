@@ -1,14 +1,15 @@
 import React from 'react'
 import { each, isFunction, assign, isArray, isObject, isArguments } from 'lodash'
 import {_setViewFn} from '../src/tags-flexbox'
-	
+import { applyStyleDefaults } from './tags-style-defaults'
+
 export * from './tags-flexbox'
 export * from './tags-helpers'
 export * from './tags-styles'
 
 // E.g createFactory('div') or createFactory('button') for react-dom,
 // and createFactory(React.View) or createFactory(React.ScrollView) for react-native
-export function createFactory(viewSpecifier) {
+export function createFactory(viewSpecifier, viewName) {
 	return function() {
 		var props = {}
 		var children = []
@@ -53,6 +54,7 @@ export function createFactory(viewSpecifier) {
 				children.push(val)
 			}
 		})
+		applyStyleDefaults(viewName, props)
 		return React.createElement(viewSpecifier, props, ...children)
 	}
 }
@@ -67,7 +69,7 @@ function _isReactObj(arg) {
 export function _bootstrap(views, renderFn) {
 	module.exports.render = renderFn
 	each(views, function(viewSpecifier, viewName) {
-		module.exports[viewName] = createFactory(viewSpecifier)
+		module.exports[viewName] = createFactory(viewSpecifier, viewName)
 	})
 	_setViewFn(module.exports.View)
 }
