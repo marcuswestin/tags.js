@@ -1,6 +1,6 @@
 import React from 'react'
 import { each, isFunction, assign, isArray, isObject, isArguments } from 'lodash'
-import {_setViewFn} from '../src/tags-flexbox'
+import {_setViewFn} from './tags-flexbox'
 import { applyStyleDefaults } from './tags-style-defaults'
 
 export * from './tags-flexbox'
