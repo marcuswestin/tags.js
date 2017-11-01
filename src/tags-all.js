@@ -47,8 +47,12 @@ export function createFactory(viewSpecifier, viewName) {
 			} else if (isObject(val)) {
 				if (val.style && props.style) {
 					throw new Error("Cannot use multiple style properties on the same element")
+				} else if (val.__value) {
+					// TODO: expose canonical way for autoreact to play well with tags.js
+					processArg(val.__value)
+				} else {
+					assign(props, val)
 				}
-				assign(props, val)
 				
 			} else {
 				children.push(val)
