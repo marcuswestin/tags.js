@@ -19,6 +19,17 @@ export function Style(styles) {
 	return new TagsStyle(styles)
 }
 
+export function TextShadow(x, y, r, color) {
+	return Style({
+		textShadowOffset: {
+			width:x,
+			height:y,
+		},
+		textShadowRadius: r,
+		textShadowColor: color
+	})
+}
+
 // Util
 ///////
 
