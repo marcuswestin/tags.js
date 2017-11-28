@@ -1,15 +1,27 @@
-import React from 'react'
-import { each, isFunction, assign, isArray, isObject, isArguments } from 'lodash'
-import {_setViewFn} from './tags-flexbox'
-import { applyStyleDefaults } from './tags-style-defaults'
+var React = require('react')
+var { each, isFunction, assign, isArray, isObject, isArguments } = require('lodash')
+var {_setViewFn} = require('./tags-flexbox')
+var { applyStyleDefaults } = require('./tags-style-defaults')
 
-export * from './tags-flexbox'
-export * from './tags-helpers'
-export * from './tags-styles'
+module.exports = {
+	createFactory: createFactory,
+	// private
+	_bootstrap: _bootstrap,
+}
+
+each(require('./tags-flexbox'), function(val, key) {
+	module.exports[key] = val
+})
+each(require('./tags-helpers'), function(val, key) {
+	module.exports[key] = val
+})
+each(require('./tags-styles'), function(val, key) {
+	module.exports[key] = val
+})
 
 // E.g createFactory('div') or createFactory('button') for react-dom,
 // and createFactory(React.View) or createFactory(React.ScrollView) for react-native
-export function createFactory(viewSpecifier, viewName) {
+function createFactory(viewSpecifier, viewName) {
 	return function() {
 		var props = {}
 		var children = []
@@ -70,7 +82,7 @@ function _isReactObj(arg) {
 	)
 }
 
-export function _bootstrap(views, renderFn) {
+function _bootstrap(views, renderFn) {
 	module.exports.render = renderFn
 	each(views, function(viewSpecifier, viewName) {
 		module.exports[viewName] = createFactory(viewSpecifier, viewName)

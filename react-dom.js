@@ -2,10 +2,10 @@
 module.exports = require('./src/tags-all')
 module.exports.loadFont = require('./src/tags-fonts').loadFont
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { each } from 'lodash'
-import { _bootstrap } from './src/tags-all'
+var React = require('react')
+var ReactDOM = require('react-dom')
+var { each } = require('lodash')
+var { _bootstrap } = require('./src/tags-all')
 
 _bootstrap(_getComponents(), function renderApp(AppComponent, domEl) {
 	if (!domEl) {
