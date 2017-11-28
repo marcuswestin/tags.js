@@ -40,4 +40,4 @@ var App = createReactClass({
   }
 })
 
-tags.render(App)
+tags.renderApp(App)

@@ -35,5 +35,5 @@ var loadingMessage = document.body.appendChild(document.createElement('div'))
 loadingMessage.innerText = 'loading fonts...'
 function onFontsLoaded() {
 	document.body.removeChild(loadingMessage)
-	Tags.render(App)
+	Tags.renderApp(App)
 }

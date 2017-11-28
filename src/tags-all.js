@@ -83,7 +83,7 @@ function _isReactObj(arg) {
 }
 
 function _bootstrap(views, renderFn) {
-	module.exports.render = renderFn
+	module.exports.renderApp = renderFn
 	each(views, function(viewSpecifier, viewName) {
 		module.exports[viewName] = createFactory(viewSpecifier, viewName)
 	})
